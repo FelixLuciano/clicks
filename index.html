@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <title>Click Speed Test ⚡</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%22-0.1em%22 y=%22.90em%22 font-size=%2286%22>⚡</text></svg>">
+
+    <meta name="description" content="Clicks-per-second meter with dynamic counting and auto reset">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Click Speed Test⚡">
+    <meta property="og:site_name" content="Click Speed Test">
+    <meta property="og:url" content="https://github.lucianofelix.com.br/clicks">
+    <meta property="og:description" content="Clicks-per-second meter with dynamic counting and auto reset">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="theme-color" content="#333">
+
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <aside></aside>
+
+    <main x-data="clickSpeedTest()" x-init="restart()">
+        <template x-teleport="body > aside">
+            <ol>
+                <template x-for="(data, index) in sortedHistory" :key="index">
+                    <li x-text="nornalize(data, 4)"></li>
+                </template>
+            </ol>
+        </template>
+
+        <header>
+            <p>
+                <span><abbr title="Clicks Per Second">CPS</abbr>:</span><br>
+                <b x-text="cpsDisplay">0.00</b>
+            </p>
+            <div></div>
+            <p> <span>CPS MAX:</span><br>
+                <b x-text="cpsMaxDisplay">0.00</b>
+            </p>
+        </header>
+
+        <div>
+            <p>Click here</p>
+            <button x-ref="btn" @mousedown="mouseDown" @mouseup="mouseUp"></button>
+            <div :style="`--cps: ${cps}`">
+            </div>
+        </div>
+
+        <footer>
+            <p>
+                <span>Clicks:</span><br>
+                <b x-text="clicks">0</b>
+            </p>
+            <div></div>
+            <p>
+                <span>Time:</span><br>
+                <b x-text="activeTimeDisplay">0.0</b>s
+            </p>
+        </footer>
+    </main>
+
+    <footer>
+        &copy;
+        <span x-data x-text="new Date().getFullYear()"></span>
+        Luciano Felix.
+        <a href="https://github.com/FelixLuciano/clicks" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+</body>
+
+</html>

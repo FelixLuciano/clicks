@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@import url('https://meyerweb.com/eric/tools/css/reset/reset.css');
+
+:root {
+    --border: 1px dotted #666;
+    font-size: 16px;
+}
+
+::selection {
+    background-color: #EEE;
+    color: #222;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #222;
+  font-family: "Lato", sans-serif;
+  color: #FFF;
+  display: grid;
+  cursor: default;
+}
+@media screen and (max-width: 48rem) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 100vh auto 4rem;
+    }
+    main {
+        grid-area: 1 / 1 / span 1 / span 1;
+        border-bottom: var(--border);
+    }
+    aside {
+        grid-area: 2 / 1 / span 1 / span 1;
+        min-height: 50vh;
+        border-bottom: var(--border);
+    }
+    body > footer {
+        grid-area: 4 / 1 / span 1 / span 1;
+    }
+}
+@media screen and (min-width: 48rem) {
+    body {
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: calc(100vh - 8rem) 4rem;
+    }
+    aside {
+        grid-area: 1 / 1 / span 1 / span 1;
+        border-right: var(--border);
+        border-bottom: var(--border);
+    }
+    main {
+        grid-area: 1 / 2 / span 3 / span 1;
+    }
+    body > footer {
+        grid-area: 3 / 1 / span 1 / span 1;
+    }
+}
+
+aside {
+    height: 100%;
+    padding: 2rem 0;
+    position: relative;
+}
+@media screen and (min-width: 48rem) {
+    aside {
+        overflow: auto;
+    }
+}
+
+aside > ol {
+    padding-left: 30vw;
+    list-style-type: decimal-leading-zero;
+    list-style-position: outside;
+    display: flex;
+    flex-direction: column;
+    gap: 3vmin;
+}
+aside > ol > ::marker {
+    color: #888;
+}
+aside > ol > li {
+    text-align: center;
+    font-size: 15vw;
+    color: #EEE;
+}
+@media screen and (min-width: 48rem) {
+    aside > ol {
+        padding-left: 11vmin;
+    }
+    aside > ol > li {
+        font-size: 5vmin;
+    }
+}
+
+main {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
+}
+main > header, main > footer {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    place-items: center;
+}
+main > header > div, main > footer > div {
+    width: 100%;
+    height: 100%;
+    border-right: var(--border);
+}
+main > header {
+    border-bottom: var(--border);
+}
+main > footer {
+    border-top: var(--border);
+}
+
+main > header > p, main > footer > p {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width: 48rem) {
+    main > header > p, main > footer > p{
+        font-size: 10vmin;
+    }
+}
+@media screen and (min-width: 48rem) {
+    main > header > p, main > footer > p {
+        font-size: 6vmin;
+    }
+}
+
+main > header > p > span, main > footer > p > span {
+    color: #AAA;
+    font-size: 1rem;
+    position: absolute;
+    left: 8%;
+    top: 8%;
+}
+
+main > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+main > div > p {
+    color: #DDD;
+    position: absolute;
+    left: 4%;
+    top: 4%;
+}
+
+main > div > button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font-size: 20vmin;
+    z-index: 1;
+    display: block;
+    cursor: pointer;
+}
+main > div > button:before {
+    content: "👆";
+}
+main > div > button:active:before {
+    content: "👇";
+}
+@media screen and (min-width: 48rem) {
+    main > div > button {
+        font-size: 12vmin;
+    }
+}
+
+main > div > div {
+    width: 65vmin;
+    height: 65vmin;
+    border-radius: 36%;
+    background-image: linear-gradient(-45deg, #F22, #F92, #FF2, #9F2, #2F2, #2F9, #2FF, #29F, #22F, #92F, #F2F, #F29, #F22, #F92, #FF2, #9F2, #2F2, #2F9, #2FF, #29F, #22F, #92F, #F2F, #F29, #F22);
+    background-size: 25vmin 25vmin;
+    background-position: 0 0;
+    position: absolute;
+    animation-name: hue-rotate;
+    animation-duration: calc(10000ms / max(1, var(--cps)));
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    filter: blur(6vmin) brightness(75%) saturate(500%);
+    z-index: -1;
+}
+@media screen and (min-width: 48rem) {
+    main > div > div {
+        width: 35vmin;
+        height: 35vmin;
+    }
+}
+@keyframes hue-rotate {
+    to {
+      background-position: 25vmin 25vmin;
+    }
+  }
+
+body > footer {
+    border-right: var(--border);
+    padding: 0 .75rem;
+    color: #AAA;
+    line-height: 4rem;
+}
+
+body > footer > a {
+    color: #DDD;
+    text-decoration: dotted underline;
+}
