@@ -11,6 +11,10 @@
     color: #222;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   background-color: #222;
@@ -34,13 +38,13 @@ body {
         border-bottom: var(--border);
     }
     body > footer {
-        grid-area: 4 / 1 / span 1 / span 1;
+        grid-area: 3 / 1 / span 1 / span 1;
     }
 }
 @media screen and (min-width: 48rem) {
     body {
         grid-template-columns: 1fr 2fr;
-        grid-template-rows: calc(100vh - 8rem) 4rem;
+        grid-template-rows: calc(100vh - 4rem) 4rem;
     }
     aside {
         grid-area: 1 / 1 / span 1 / span 1;
@@ -48,10 +52,10 @@ body {
         border-bottom: var(--border);
     }
     main {
-        grid-area: 1 / 2 / span 3 / span 1;
+        grid-area: 1 / 2 / span 2 / span 1;
     }
     body > footer {
-        grid-area: 3 / 1 / span 1 / span 1;
+        grid-area: 2 / 1 / span 1 / span 1;
     }
 }
 
@@ -62,32 +66,37 @@ aside {
 }
 @media screen and (min-width: 48rem) {
     aside {
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }
 
 aside > ol {
-    padding-left: 30vw;
+    padding: 2vw 0 12vw 30vw;
     list-style-type: decimal-leading-zero;
     list-style-position: outside;
     display: flex;
     flex-direction: column;
-    gap: 3vmin;
+    gap: 2vw;
 }
 aside > ol > ::marker {
     color: #888;
 }
+aside > ol > :first-of-type::marker {
+    color: #EEE;
+}
 aside > ol > li {
     text-align: center;
-    font-size: 15vw;
+    transform: rotate(-15deg);
+    font-size: 8vw;
     color: #EEE;
 }
 @media screen and (min-width: 48rem) {
     aside > ol {
-        padding-left: 11vmin;
+        padding: 2vw 0 4vw 8vw;
     }
     aside > ol > li {
-        font-size: 5vmin;
+        font-size: 4vw;
     }
 }
 
@@ -99,7 +108,6 @@ main {
 }
 main > header, main > footer {
     display: grid;
-    grid-template-columns: 1fr 1px 1fr;
     place-items: center;
 }
 main > header > div, main > footer > div {
@@ -109,9 +117,16 @@ main > header > div, main > footer > div {
 }
 main > header {
     border-bottom: var(--border);
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
 }
 main > footer {
     border-top: var(--border);
+    grid-template-columns: 1fr 1px 1fr;
+}
+
+
+main > header > p:nth-of-type(2) {
+    border-bottom: .25rem solid #888;
 }
 
 main > header > p, main > footer > p {
@@ -177,7 +192,26 @@ main > div > button:active:before {
     }
 }
 
-main > div > div {
+main > div > div:first-of-type {
+    width: 100%;
+    height: .25rem;
+    opacity: 0;
+    background-color: #FFF;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale-x(100%);
+    transform-origin: left center;
+    transition: transform 1s, opacity 1s;
+}
+main > div > button:active + div {
+    opacity: 1;
+    transform: scalex(0%);
+    transition: transform 0s, opacity 0s;
+}
+
+main > div > div:nth-of-type(2) {
     width: 65vmin;
     height: 65vmin;
     border-radius: 36%;
@@ -193,7 +227,7 @@ main > div > div {
     z-index: -1;
 }
 @media screen and (min-width: 48rem) {
-    main > div > div {
+    main > div > div:nth-of-type(2) {
         width: 35vmin;
         height: 35vmin;
     }
@@ -205,10 +239,14 @@ main > div > div {
   }
 
 body > footer {
-    border-right: var(--border);
     padding: 0 .75rem;
     color: #AAA;
     line-height: 4rem;
+}
+@media screen and (min-width: 48rem) {
+    body > footer {
+        border-right: .25rem solid #666;
+    }
 }
 
 body > footer > a {

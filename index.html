@@ -38,11 +38,16 @@
 
         <header>
             <p>
-                <span><abbr title="Clicks Per Second">CPS</abbr>:</span><br>
+                <span>Instant  <abbr title="Clicks Per Second">CPS</abbr>:</span><br>
+                <b x-text="instantCpsDisplay">0.00</b>
+            </p>
+            <div></div>
+            <p>
+                <span>Average:</span><br>
                 <b x-text="cpsDisplay">0.00</b>
             </p>
             <div></div>
-            <p> <span>CPS MAX:</span><br>
+            <p> <span>Maximum:</span><br>
                 <b x-text="cpsMaxDisplay">0.00</b>
             </p>
         </header>
@@ -50,8 +55,8 @@
         <div>
             <p>Click here</p>
             <button x-ref="btn" @mousedown="mouseDown" @mouseup="mouseUp"></button>
-            <div :style="`--cps: ${cps}`">
-            </div>
+            <div></div>
+            <div :style="`--cps: ${cps}`"></div>
         </div>
 
         <footer>

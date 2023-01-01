@@ -5,6 +5,7 @@ const clickSpeedTest = () => {
 
     return {
         cps: 0,
+        instantCps: 0,
         cpsMax: 0,
         clicks: 0,
         startTime: 0,
@@ -27,6 +28,10 @@ const clickSpeedTest = () => {
 
         get cpsDisplay() {
             return this.nornalize(this.cps)
+        },
+
+        get instantCpsDisplay() {
+            return this.nornalize(this.instantCps)
         },
 
         get cpsMaxDisplay() {
@@ -53,8 +58,10 @@ const clickSpeedTest = () => {
             if (this.idleTime > 1000)
                 this.restart()
 
-            if (this.activeTime > 100)
+            if (this.activeTime > 100) {
+                this.instantCps = 1000 / (this.time - this.endTime)
                 this.cps = this.clicks / this.activeTime * 1000
+            }
 
             if (this.activeTime > 1000)
                 this.cpsMax = Math.max(this.cps, this.cpsMax)
@@ -64,7 +71,7 @@ const clickSpeedTest = () => {
             clearTimeout(this.storeTimeout)
 
             this.endTime = this.time
-            this.storeTimeout = setTimeout(() => this.store(), 1000)
+            this.storeTimeout = setTimeout(() => this.store(), 1200)
         },
 
         store() {
