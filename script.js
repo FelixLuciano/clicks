@@ -35,7 +35,7 @@ const clickSpeedTest = () => {
         },
 
         get cpsMaxDisplay() {
-            return this.nornalize(this.cpsMax)
+            return this.nornalize(this.cpsMax, 4)
         },
 
         get sortedHistory() {
