@@ -36,11 +36,15 @@
     --border-width: .25rem;
 }
 .b-light {
-    --border-color: #888;
+    --border-color: #BBB;
 }
 
 .p-0 {
     padding: 0 !important;
+}
+
+.color-clear {
+    color: #DDD !important;
 }
 
 body {
