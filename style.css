@@ -233,8 +233,8 @@ main {
     height: 65vmin;
     border-radius: 36%;
     background-image: linear-gradient(-45deg, var(--rainbow));
-    background-size: 25vmin 25vmin;
-    background-position: 0 0;
+    background-size: 80% 80%;
+    background-position: 0% 0%;
     position: absolute;
     animation-name: hue-rotate;
     animation-duration: calc(10000ms / max(1, var(--cps)));
@@ -251,7 +251,7 @@ main {
 }
 @keyframes hue-rotate {
     to {
-      background-position: 25vmin 25vmin;
+      background-position: 160% 160%;
     }
 }
 
