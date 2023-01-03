@@ -117,5 +117,5 @@ const history = () => {
 function getDisplay(num, fix = 2, unit = '') {
     const [intVal, floatVal] = num.toFixed(fix).split('.')
 
-    return `<span class="value__int">${intVal}</span><span class="value__float">.${floatVal}</span><span class="value__unit"> ${unit}</span>`
+    return `<span class="value__int">${intVal}</span>.<span class="value__float">${floatVal}</span><span class="value__unit"> ${unit}</span>`
 }

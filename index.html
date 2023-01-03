@@ -25,7 +25,15 @@
 </head>
 
 <body>
-    <aside class="b-r b-b" x-data="history()" x-init="fetch()" @store.window="store($event)">
+    <!-- <h1 style="visibility: hidden;">
+        Click Speed Test⚡
+    </h1> -->
+
+    <aside class="section b-r b-b" x-data="history()" x-init="fetch()" @store.window="store($event)">
+        <h2>
+            Best rates:
+        </h2>
+
         <ol class="history">
             <template x-for="(data, index) in history" :key="index">
                 <li class="history__item" x-html="getDisplay(data, 4)"></li>

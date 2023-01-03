@@ -2,7 +2,10 @@
 @import url('https://meyerweb.com/eric/tools/css/reset/reset.css');
 
 :root {
+    background-color: #222;
+    color: #AAA;
     font-size: 16px;
+    font-family: "Lato", sans-serif;
 }
 ::selection {
     background-color: #EEE;
@@ -49,9 +52,6 @@
 
 body {
   min-height: 100vh;
-  background-color: #222;
-  font-family: "Lato", sans-serif;
-  color: #FFF;
   display: grid;
   cursor: default;
 }
@@ -62,12 +62,11 @@ body {
     }
     main {
         grid-area: 1 / 1 / span 1 / span 1;
-        border-bottom: var(--border);
     }
     aside {
         grid-area: 2 / 1 / span 1 / span 1;
         min-height: 50vh;
-        border-bottom: var(--border);
+        border-top: var(--border-width) solid var(--border-color);
     }
     footer {
         grid-area: 3 / 1 / span 1 / span 1;
@@ -80,8 +79,8 @@ body {
     }
     aside {
         grid-area: 1 / 1 / span 1 / span 1;
-        border-right: var(--border);
-        border-bottom: var(--border);
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     main {
         grid-area: 1 / 2 / span 2 / span 1;
@@ -91,33 +90,27 @@ body {
     }
 }
 
-aside {
-    height: 100%;
-    padding: 2rem 0;
-    position: relative;
-}
-@media (max-width: 48rem) {
-    aside {
-        border-top: var(--border-width) solid var(--border-color);
-    }
-}
-@media (min-width: 48rem) {
-    aside {
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
+h2 {
+    font-size: 1rem;
+    position: absolute;
+    left: 3vw;
+    top: 2vw;
 }
 
 .history {
-    padding: 2vw 0 12vw 30vw;
+    width: 100%;
+    height: 100%;
+    padding: 5vw 0 16vw 30vw;
     list-style-type: decimal-leading-zero;
     list-style-position: outside;
     display: flex;
     flex-direction: column;
     gap: 2vw;
 }
-.history > ::marker {
-    color: #888;
+@media (min-width: 48rem) {
+    .history {
+        padding: 3vw 0 4vw 10vw;
+    }
 }
 .history > :first-of-type::marker {
     color: #EEE;
@@ -125,13 +118,9 @@ aside {
 .history__item {
     text-align: center;
     transform: rotate(-15deg);
-    font-size: 8vw;
-    color: #EEE;
+    font-size: 12vw;
 }
 @media (min-width: 48rem) {
-    .history {
-        padding: 2vw 0 4vw 8vw;
-    }
     .history__item {
         font-size: 4vw;
     }
@@ -161,13 +150,6 @@ main {
 .section.section--span-full {
     grid-column-end: span 6;
 }
-.section > h2 {
-    color: #AAA;
-    font-size: 1rem;
-    position: absolute;
-    left: 3vw;
-    top: 2vw;
-}
 
 .value {
     font-size: 10vmin;
@@ -178,6 +160,7 @@ main {
     }
 }
 .value__int {
+    color: #EEE;
 }
 .value__float {
     font-size: .8em;
@@ -261,7 +244,6 @@ main {
 
 footer {
     padding: 0 .75rem;
-    color: #AAA;
     line-height: 4rem;
 }
 
