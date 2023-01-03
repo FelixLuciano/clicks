@@ -2,17 +2,45 @@
 @import url('https://meyerweb.com/eric/tools/css/reset/reset.css');
 
 :root {
-    --border: 1px dotted #666;
     font-size: 16px;
 }
-
 ::selection {
     background-color: #EEE;
     color: #222;
 }
-
 * {
     box-sizing: border-box;
+}
+
+:root {
+    --border-width: 1px;
+    --border-style: dotted;
+    --border-color: #666;
+}
+.b-t {
+    border-top: var(--border-width) var(--border-style) var(--border-color);
+}
+.b-r {
+    border-right: var(--border-width) var(--border-style) var(--border-color);
+}
+.b-b {
+    border-bottom: var(--border-width) var(--border-style) var(--border-color);
+}
+.b-l {
+    border-left: var(--border-width) var(--border-style) var(--border-color);
+}
+.b-solid {
+    --border-style: solid !important;
+}
+.b-large {
+    --border-width: .25rem;
+}
+.b-light {
+    --border-color: #888;
+}
+
+.p-0 {
+    padding: 0 !important;
 }
 
 body {
@@ -23,7 +51,7 @@ body {
   display: grid;
   cursor: default;
 }
-@media screen and (max-width: 48rem) {
+@media (max-width: 48rem) {
     body {
         grid-template-columns: 1fr;
         grid-template-rows: 100vh auto 4rem;
@@ -37,11 +65,11 @@ body {
         min-height: 50vh;
         border-bottom: var(--border);
     }
-    body > footer {
+    footer {
         grid-area: 3 / 1 / span 1 / span 1;
     }
 }
-@media screen and (min-width: 48rem) {
+@media (min-width: 48rem) {
     body {
         grid-template-columns: 1fr 2fr;
         grid-template-rows: calc(100vh - 4rem) 4rem;
@@ -54,7 +82,7 @@ body {
     main {
         grid-area: 1 / 2 / span 2 / span 1;
     }
-    body > footer {
+    footer {
         grid-area: 2 / 1 / span 1 / span 1;
     }
 }
@@ -64,14 +92,19 @@ aside {
     padding: 2rem 0;
     position: relative;
 }
-@media screen and (min-width: 48rem) {
+@media (max-width: 48rem) {
+    aside {
+        border-top: var(--border-width) solid var(--border-color);
+    }
+}
+@media (min-width: 48rem) {
     aside {
         overflow-y: auto;
         overflow-x: hidden;
     }
 }
 
-aside > ol {
+.history {
     padding: 2vw 0 12vw 30vw;
     list-style-type: decimal-leading-zero;
     list-style-position: outside;
@@ -79,97 +112,80 @@ aside > ol {
     flex-direction: column;
     gap: 2vw;
 }
-aside > ol > ::marker {
+.history > ::marker {
     color: #888;
 }
-aside > ol > :first-of-type::marker {
+.history > :first-of-type::marker {
     color: #EEE;
 }
-aside > ol > li {
+.history__item {
     text-align: center;
     transform: rotate(-15deg);
     font-size: 8vw;
     color: #EEE;
 }
-@media screen and (min-width: 48rem) {
-    aside > ol {
+@media (min-width: 48rem) {
+    .history {
         padding: 2vw 0 4vw 8vw;
     }
-    aside > ol > li {
+    .history__item {
         font-size: 4vw;
     }
 }
 
 main {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 3fr 1fr;
-}
-main > header, main > footer {
     display: grid;
-    place-items: center;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 3fr 1fr;
 }
-main > header > div, main > footer > div {
+.section {
     width: 100%;
     height: 100%;
-    border-right: var(--border);
-}
-main > header {
-    border-bottom: var(--border);
-    grid-template-columns: 1fr 1px 1fr 1px 1fr;
-}
-main > footer {
-    border-top: var(--border);
-    grid-template-columns: 1fr 1px 1fr;
-}
-
-
-main > header > p:nth-of-type(2) {
-    border-bottom: .25rem solid #888;
-}
-
-main > header > p, main > footer > p {
-    width: 100%;
-    height: 100%;
+    padding-top: .5em;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-@media screen and (max-width: 48rem) {
-    main > header > p, main > footer > p{
-        font-size: 10vmin;
-    }
-}
-@media screen and (min-width: 48rem) {
-    main > header > p, main > footer > p {
-        font-size: 6vmin;
-    }
-}
 
-main > header > p > span, main > footer > p > span {
+.section.section--span-2 {
+    grid-column-end: span 2;
+}
+.section.section--span-3 {
+    grid-column-end: span 3;
+}
+.section.section--span-full {
+    grid-column-end: span 6;
+}
+.section > h2 {
     color: #AAA;
     font-size: 1rem;
     position: absolute;
-    left: 8%;
-    top: 8%;
+    left: 3vw;
+    top: 2vw;
 }
 
-main > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.value {
+    font-size: 10vmin;
 }
-main > div > p {
-    color: #DDD;
-    position: absolute;
-    left: 4%;
-    top: 4%;
+@media (min-width: 48rem) {
+    .value {
+        font-size: 6vmin;
+    }
+}
+.value__int {
+}
+.value__float {
+    font-size: .8em;
+    color: #BBB;
+    
+}
+.value__unit {
+    font-size: .6em;
+    color: #BBB;
 }
 
-main > div > button {
+.click-button {
     width: 100%;
     height: 100%;
     border: none;
@@ -180,19 +196,19 @@ main > div > button {
     display: block;
     cursor: pointer;
 }
-main > div > button:before {
+.click-button:before {
     content: "👆";
 }
-main > div > button:active:before {
+.click-button:active:before {
     content: "👇";
 }
-@media screen and (min-width: 48rem) {
-    main > div > button {
+@media (min-width: 48rem) {
+    .click-button {
         font-size: 12vmin;
     }
 }
 
-main > div > div:first-of-type {
+.click-button__hold {
     width: 100%;
     height: .25rem;
     opacity: 0;
@@ -205,13 +221,13 @@ main > div > div:first-of-type {
     transform-origin: left center;
     transition: transform 1s, opacity 1s;
 }
-main > div > button:active + div {
+.click-button:active + .click-button__hold {
     opacity: 1;
     transform: scalex(0%);
     transition: transform 0s, opacity 0s;
 }
 
-main > div > div:nth-of-type(2) {
+.click-button__background {
     width: 65vmin;
     height: 65vmin;
     border-radius: 36%;
@@ -226,8 +242,8 @@ main > div > div:nth-of-type(2) {
     filter: blur(6vmin) brightness(75%) saturate(500%);
     z-index: -1;
 }
-@media screen and (min-width: 48rem) {
-    main > div > div:nth-of-type(2) {
+@media (min-width: 48rem) {
+    .click-button__background {
         width: 35vmin;
         height: 35vmin;
     }
@@ -236,20 +252,15 @@ main > div > div:nth-of-type(2) {
     to {
       background-position: 25vmin 25vmin;
     }
-  }
+}
 
-body > footer {
+footer {
     padding: 0 .75rem;
     color: #AAA;
     line-height: 4rem;
 }
-@media screen and (min-width: 48rem) {
-    body > footer {
-        border-right: .25rem solid #666;
-    }
-}
 
-body > footer > a {
+footer > a {
     color: #DDD;
     text-decoration: dotted underline;
 }

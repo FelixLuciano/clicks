@@ -1,18 +1,13 @@
 const clickSpeedTest = () => {
-    const STORAGE_KEY = "com.lucianofelix.clickspeedtest"
-    const storageData = localStorage.getItem(STORAGE_KEY)
-    const history = (JSON.parse(storageData) || []).slice(0, 20)
-
     return {
-        cps: 0,
-        instantCps: 0,
-        cpsMax: 0,
         clicks: 0,
         startTime: 0,
         endTime: 0,
         activeTime: 0,
+        cps: 0,
+        instantCps: 0,
+        cpsMax: 0,
         storeTimeout: null,
-        history,
 
         get time() {
             return new Date().getTime()
@@ -23,31 +18,23 @@ const clickSpeedTest = () => {
         },
 
         get activeTimeDisplay() {
-            return this.nornalize(this.activeTime / 1000, 1)
+            return getDisplay(this.activeTime / 1000, 1, 's')
         },
 
         get cpsDisplay() {
-            return this.nornalize(this.cps)
+            return getDisplay(this.cps)
         },
 
         get instantCpsDisplay() {
-            return this.nornalize(this.instantCps)
+            return getDisplay(this.instantCps)
         },
 
         get cpsMaxDisplay() {
-            return this.nornalize(this.cpsMax, 4)
-        },
-
-        get sortedHistory() {
-            return this.history.sort((a, b) => b - a)
-        },
-
-        nornalize(num, fix = 2) {
-            return num.toFixed(fix)
+            return getDisplay(this.cpsMax, 4)
         },
 
         restart() {
-            this.clicks = this.cps = this.cpsMax = 0
+            this.clicks = this.cps = this.instantCps = this.cpsMax = 0
             this.startTime = this.time
         },
 
@@ -68,19 +55,67 @@ const clickSpeedTest = () => {
         },
 
         mouseUp() {
-            clearTimeout(this.storeTimeout)
-
             this.endTime = this.time
-            this.storeTimeout = setTimeout(() => this.store(), 1200)
+
+            if (this.cpsMax > 0) {
+                clearTimeout(this.storeTimeout)
+
+                this.storeTimeout = setTimeout(() => this.store(), 1200)
+            }
         },
 
         store() {
-            if (this.cpsMax > 0)
-                this.history.push(this.cpsMax)
-
-            const value = JSON.stringify(this.history)
-
-            localStorage.setItem(STORAGE_KEY, value)
+            this.$dispatch('store', {
+                value: this.cpsMax
+            })
         },
     }
+}
+
+const history = () => {
+    const STORAGE_KEY = "com.lucianofelix.clickspeedtest"
+
+    return {
+        history: [],
+
+        get serializedHistory() {
+            return JSON.stringify(this.history.slice(0, 20))
+        },
+
+        insert(value) {
+            let index
+
+            for (index = 0; index < this.history.length; index++)
+                if (value > this.history[index])
+                    break
+
+                this.history.splice(index, 0, value)
+        },
+
+        fetch() {
+            const storageData = localStorage.getItem(STORAGE_KEY)
+
+            if (storageData != null)
+                this.history = JSON.parse(storageData)
+            else
+                this.commit()
+        },
+
+        commit() {
+            const a = this.serializedHistory
+            localStorage.setItem(STORAGE_KEY, a)
+        },
+
+        store(event) {
+            this.insert(event.detail.value)
+            this.commit()
+        },
+    }
+}
+
+
+function getDisplay(num, fix = 2, unit = '') {
+    const [intVal, floatVal] = num.toFixed(fix).split('.')
+
+    return `<span class="value__int">${intVal}</span><span class="value__float">.${floatVal}</span><span class="value__unit"> ${unit}</span>`
 }

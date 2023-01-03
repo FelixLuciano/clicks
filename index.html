@@ -25,54 +25,69 @@
 </head>
 
 <body>
-    <aside></aside>
+    <aside class="b-r b-b" x-data="history()" x-init="fetch()" @store.window="store($event)">
+        <ol class="history">
+            <template x-for="(data, index) in history" :key="index">
+                <li class="history__item" x-html="getDisplay(data, 4)"></li>
+            </template>
+        </ol>
+    </aside>
 
     <main x-data="clickSpeedTest()" x-init="restart()">
-        <template x-teleport="body > aside">
-            <ol>
-                <template x-for="(data, index) in sortedHistory" :key="index">
-                    <li x-text="nornalize(data, 4)"></li>
-                </template>
-            </ol>
-        </template>
+        <section class="section section--span-2 b-r b-b">
+            <h2>
+                Instant <abbr title="Clicks Per Second">CPS</abbr>:
+            </h2>
 
-        <header>
-            <p>
-                <span>Instant  <abbr title="Clicks Per Second">CPS</abbr>:</span><br>
-                <b x-text="instantCpsDisplay">0.00</b>
-            </p>
-            <div></div>
-            <p>
-                <span>Average:</span><br>
-                <b x-text="cpsDisplay">0.00</b>
-            </p>
-            <div></div>
-            <p> <span>Maximum:</span><br>
-                <b x-text="cpsMaxDisplay">0.00</b>
-            </p>
-        </header>
+            <div class="value" x-html="instantCpsDisplay"></div>
+        </section>
 
-        <div>
-            <p>Click here</p>
-            <button x-ref="btn" @mousedown="mouseDown" @mouseup="mouseUp"></button>
-            <div></div>
-            <div :style="`--cps: ${cps}`"></div>
-        </div>
+        <section class="section section--span-2 b-b b-large b-solid b-light">
+            <h2>
+                Average:
+            </h2>
 
-        <footer>
-            <p>
-                <span>Clicks:</span><br>
-                <b x-text="clicks">0</b>
-            </p>
-            <div></div>
-            <p>
-                <span>Time:</span><br>
-                <b x-text="activeTimeDisplay">0.0</b>s
-            </p>
-        </footer>
+            <div class="value" x-html="cpsDisplay"></div>
+        </section>
+
+        <section class="section section--span-2 b-l b-b">
+            <h2>
+                Maximum:
+            </h2>
+
+            <div class="value" x-html="cpsMaxDisplay"></div>
+        </section>
+
+        <section class="section section--span-full p-0">
+            <h2>
+                Click here
+            </h2>
+
+            <button class="click-button" x-ref="btn" @mousedown="mouseDown" @mouseup="mouseUp"></button>
+            <div class="click-button__hold"></div>
+            <div class="click-button__background" :style="`--cps: ${cps}`"></div>
+        </section>
+
+        <section class="section section--span-3 b-t b-r">
+            <h2>
+                Clicks:
+            </h2>
+
+            <div class="value">
+                <span class="value__int" x-text="clicks"></span>
+            </div>
+        </section>
+
+        <section class="section section--span-3 b-t">
+            <h2>
+                Time:
+            </h2>
+
+            <div class="value" x-html="activeTimeDisplay"></div>
+        </section>
     </main>
 
-    <footer>
+    <footer class="b-r b-large b-solid">
         &copy;
         <span x-data x-text="new Date().getFullYear()"></span>
         Luciano Felix.
