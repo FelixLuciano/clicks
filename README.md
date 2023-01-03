@@ -8,13 +8,15 @@
 
 <p align="center">
     Clicks-per-second meter with dynamic counting and auto reset.
-    <br>
-    <strong><a href="https://github.lucianofelix.com.br/clicks/">See online</a></strong>
+</p>
+<p align="center">
+    <a href="https://github.com/FelixLuciano/clicks/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/FelixLuciano/clicks/actions/workflows/pages/pages-build-deployment/badge.svg" alt="pages-build-deployment"></a>
 </p>
 
 <br>
 
 ![App screenshot](assets/image/screenshot.jpg)
+[See online](https://github.lucianofelix.com.br/clicks/)
 
 It's based on [my previous Pen at CodePen](https://codepen.io/FelixLuciano/pen/MWavXmy).
 
