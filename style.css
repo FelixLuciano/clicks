@@ -228,10 +228,11 @@ main {
 }
 
 .click-button__background {
+    --rainbow: #F22, #F92, #FF2, #9F2, #2F2, #2F9, #2FF, #29F, #22F, #92F, #F2F, #F29, #F22, #F92, #FF2, #9F2, #2F2, #2F9, #2FF, #29F, #22F, #92F, #F2F, #F29, #F22;
     width: 65vmin;
     height: 65vmin;
     border-radius: 36%;
-    background-image: linear-gradient(-45deg, #F22, #F92, #FF2, #9F2, #2F2, #2F9, #2FF, #29F, #22F, #92F, #F2F, #F29, #F22, #F92, #FF2, #9F2, #2F2, #2F9, #2FF, #29F, #22F, #92F, #F2F, #F29, #F22);
+    background-image: linear-gradient(-45deg, var(--rainbow));
     background-size: 25vmin 25vmin;
     background-position: 0 0;
     position: absolute;
