@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <defs>
-        <linearGradient id="rainbow" x1="0%" y1="0%" x2="25%" y2="25%" spreadMethod="repeat">
+        <linearGradient id="rainbow" x1="0%" y1="0%" x2="40%" y2="40%" spreadMethod="repeat">
             <stop offset="0%" stop-color="#F22"/>
             <stop offset="8.333%" stop-color="#F92"/>
             <stop offset="16.667%" stop-color="#FF2"/>
@@ -19,12 +19,12 @@
         <style>
             #bg {
                 fill: url(#rainbow);
-                filter: blur(9px) brightness(90%) saturate(1000%);
+                filter: blur(10px) brightness(75%) saturate(500%);
             }
         </style>
     </defs>
 
-    <circle id="bg" cx="50" cy="50" r="32"/>
+    <circle id="bg" cx="50" cy="50" r="30"/>
 
     <text x="50" y="50" dy=".30em" text-anchor="middle" font-size="30">👆</text>
 </svg>
