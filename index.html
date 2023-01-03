@@ -34,6 +34,8 @@
             Best rates:
         </h2>
 
+        <button class="section__help-btn" title="Top 20 maximum average CPS">?</button>
+
         <ol class="history">
             <template x-for="(data, index) in history" :key="index">
                 <li class="history__item" x-html="getDisplay(data, 4)"></li>
@@ -47,6 +49,8 @@
                 Instant <abbr title="Clicks Per Second">CPS</abbr>:
             </h2>
 
+            <button class="section__help-btn" title="Frequency between simultaneous clicks">?</button>
+
             <div class="value" x-html="instantCpsDisplay"></div>
         </section>
 
@@ -55,6 +59,8 @@
                 Average:
             </h2>
 
+            <button class="section__help-btn" title="Clicks divided by time">?</button>
+
             <div class="value" x-html="cpsDisplay"></div>
         </section>
 
@@ -62,6 +68,8 @@
             <h2>
                 Maximum:
             </h2>
+
+            <button class="section__help-btn" title="Maximum average CPS">?</button>
 
             <div class="value" x-html="cpsMaxDisplay"></div>
         </section>
@@ -80,6 +88,8 @@
             <h2>
                 Clicks:
             </h2>
+
+            <button class="section__help-btn" title="Restarts after 1 second idle">?</button>
 
             <div class="value">
                 <span class="value__int" x-text="clicks"></span>
