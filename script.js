@@ -46,7 +46,7 @@ const clickSpeedTest = () => {
                 this.restart()
 
             if (this.activeTime > 100) {
-                this.instantCps = 1000 / (this.time - this.endTime)
+                this.instantCps = 1000 / this.idleTime
                 this.cps = this.clicks / this.activeTime * 1000
             }
 
