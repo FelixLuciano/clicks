@@ -238,7 +238,7 @@ main {
 }
 @keyframes hue-rotate {
     to {
-      background-position: 160% 160%;
+      background-position: 400% 400%;
     }
 }
 
