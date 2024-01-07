@@ -1,6 +1,6 @@
-<!-- <p align="center">
+<p align="center">
     <img src="assets/image/logo.svg" width="256">
-</p> -->
+</p>
 
 <h1 align="center">
     Click Speed test ⚡
